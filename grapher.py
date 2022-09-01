@@ -13,7 +13,10 @@ def equations(x): # Define the equasions here. If you dont want one, just set it
 screenWidth = 600 # Any Integer
 screenHeight = 400 # Any Integer
 
-import turtle, numpy, math
+import turtle, math
+try: import numpy
+except: pass
+
 x = 0 - (screenWidth / 2)
 
 screen = turtle.Screen()
