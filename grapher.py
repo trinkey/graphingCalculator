@@ -31,8 +31,8 @@ turtle3.goto(-100, 0)
 
 for i in range(round(screenWidth / step)):
     equation1 = 0.001 * (x ** 3) + x
-    equation3 = 0.003 * x ** 2 - (screenHeight / 2)
     equation2 = math.floor(x / 15) * 15
+    equation3 = 0.003 * x ** 2 - (screenHeight / 2)
     
     turtle1.goto(x, equation1)
     turtle1.pd()
