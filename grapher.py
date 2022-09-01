@@ -30,17 +30,17 @@ turtle3.speed(0)
 turtle3.goto(-100, 0)
 
 for i in range(round(screenWidth / step)):
-    equasion1 = 0.01 * (x ** 3) + (0.5 * x)
-    equasion3 = 0
-    equasion2 = -x
+    equation1 = 0.01 * (x ** 3) + (0.5 * x)
+    equation3 = 3 * x ** 2
+    equation2 = -x
     
-    turtle1.goto(x, equasion1)
+    turtle1.goto(x, equation1)
     turtle1.pd()
     
-    turtle2.goto(x, equasion2)
+    turtle2.goto(x, equation2)
     turtle2.pd()
     
-    turtle3.goto(x, equasion3)
+    turtle3.goto(x, equation3)
     turtle3.pd()
     
     x += step
