@@ -70,3 +70,4 @@ if mode == 0 or mode == 2:
           equations(float(x))
           print("Y values when x = " + x + ":\nEquation 1: " + str(equation1) + "\nEquation 2: " + str(equation2) + "\nEquation 3: " + str(equation3))
         except: print("Bad input")
+screen.mainloop()
