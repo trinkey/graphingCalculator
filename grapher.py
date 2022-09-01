@@ -1,6 +1,6 @@
 equation1, equation2, equation3 = 0, 0, 0 # Don't mind this line, it serves no purpse to you and changing it will do nothing
 
-step = 1 # How visually accurate the graph is - I suggest keeping it at 1 unless you need to chage it othewise
+step = 0.1 # How visually accurate the graph is - I suggest keeping it at 1 unless you need to chage it othewise
 mode = 1 # Modes: 0 - input/output; 1 - graph only; 2 - both
 
 # Imagine the equasion# = as a y =
@@ -10,8 +10,8 @@ def equations(x): # Define the equasions here. If you dont want one, just set it
     equation2 = math.floor(x / 15) * 10
     equation3 = 86.6
 
-screenWidth = 600 # Any Integer
-screenHeight = 400 # Any Integer
+screenWidth = 1800 # Any Integer
+screenHeight = 1000 # Any Integer
 
 import turtle, math
 try: import numpy
