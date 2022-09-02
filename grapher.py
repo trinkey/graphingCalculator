@@ -8,8 +8,8 @@ screenHeight = 400 # Any Integer
 # Imagine the equasion# = as a y =
 def equations(x): # Define the equasions here. If you dont want one, just set it to 0 and it will meka a straight line at y = 0 
     global equation1, equation2, equation3, equation1string, equation2string, equation3string
-    equation1 = screenHeight
-    equation2 = screenHeight
+    equation1 = math.floor(x / 15) * 10
+    equation2 = 0.003 * x ** 2 - (screenHeight / 2) + 10
     equation3 = 10 * math.sqrt(x)
     # You don't need to do anything below this line
     
