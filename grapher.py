@@ -11,6 +11,7 @@ def equations(x): # Define the equasions here. If you dont want one, just set it
     equation1 = math.floor(x / 15) * 10
     equation2 = 0.003 * x ** 2 - (screenHeight / 2) + 10
     equation3 = 10 * math.sqrt(x)
+    
     # You don't need to do anything below this line
     
     if math.isnan(float(equation1)): turtle1.pu(); equation1 = 0; equation1string = "NaN"
@@ -66,8 +67,6 @@ turtle2.hideturtle()
 turtle3.hideturtle()
 
 screen.update()
-
-
 
 if mode == 0 or mode == 2:
     while True:
