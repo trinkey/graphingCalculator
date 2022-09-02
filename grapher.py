@@ -1,6 +1,6 @@
 step = 0.1 # How visually accurate the graph is - I suggest keeping it at 0.1 unless you need to chage it othewise
 
-mode = 1 # Modes: 0 - input/output; 1 - graph only; 2 - both
+mode = 2 # Modes: 0 - input/output; 1 - graph only; 2 - both
 
 screenWidth = 600 # Any Integer
 screenHeight = 400 # Any Integer
@@ -8,8 +8,8 @@ screenHeight = 400 # Any Integer
 # Imagine the equasion# = as a y =
 def equations(x): # Define the equasions here. If you dont want one, just set it to 0 and it will meka a straight line at y = 0 
     global equation1, equation2, equation3, equation1string, equation2string, equation3string
-    equation1 = math.floor(x / 15) * 10
-    equation2 = 0.003 * x ** 2 - (screenHeight / 2)
+    equation1 = screenHeight
+    equation2 = screenHeight
     equation3 = 10 * math.sqrt(x)
     # You don't need to do anything below this line
     
@@ -25,28 +25,28 @@ equation1, equation2, equation3 = 0, 0, 0
 
 x = 0 - (screenWidth / 2)
 
-screen = turtle.Screen()
-screen.update()
-screen.setup(screenWidth, screenHeight)
-screen.bgcolor("#333333")
-screen.tracer(0)
-
-turtle1 = turtle.Turtle()
-turtle1.color("deep sky blue")
-turtle1.pu()
-turtle1.speed(0)
-
-turtle2 = turtle.Turtle()
-turtle2.color("medium spring green")
-turtle2.pu()
-turtle2.speed(0)
-
-turtle3 = turtle.Turtle()
-turtle3.color("orchid")
-turtle3.pu()
-turtle3.speed(0)
-
 if mode == 1 or mode == 2:
+    screen = turtle.Screen()
+    screen.update()
+    screen.setup(screenWidth, screenHeight)
+    screen.bgcolor("#333333")
+    screen.tracer(0)
+    
+    turtle1 = turtle.Turtle()
+    turtle1.color("deep sky blue")
+    turtle1.pu()
+    turtle1.speed(0)
+    
+    turtle2 = turtle.Turtle()
+    turtle2.color("medium spring green")
+    turtle2.pu()
+    turtle2.speed(0)
+    
+    turtle3 = turtle.Turtle()
+    turtle3.color("orchid")
+    turtle3.pu()
+    turtle3.speed(0)
+    
     for i in range(round(screenWidth / step)):
         equations(x)
         
