@@ -1,4 +1,5 @@
-step = 0.1 # How visually accurate the graph is - I suggest keeping it at 1 unless you need to chage it othewise
+step = 0.1 # How visually accurate the graph is - I suggest keeping it at 0.1 unless you need to chage it othewise
+
 mode = 1 # Modes: 0 - input/output; 1 - graph only; 2 - both
 
 screenWidth = 600 # Any Integer
@@ -7,15 +8,15 @@ screenHeight = 400 # Any Integer
 # Imagine the equasion# = as a y =
 def equations(x): # Define the equasions here. If you dont want one, just set it to 0 and it will meka a straight line at y = 0 
     global equation1, equation2, equation3
-    equation1 = 0.001 * (x ** 3) + x
+    equation1 = math.floor(x / 15) * 10
     equation2 = 0.003 * x ** 2 - (screenHeight / 2)
-    equation3 = math.floor(x / 15) * 15
+    equation3 = 10 * math.sqrt(x)
     
     # You don't need to do anything below this line
     
-    if not equation1 <= 1000000 * screenHeight and not 1000000 * equation1 >= screenHeight: turtle1.pu(); equation1 = screenHeight
-    if not equation2 <= 1000000 * screenHeight and not 1000000 * equation2 >= screenHeight: turtle2.pu(); equation2 = screenHeight
-    if not equation3 <= 1000000 * screenHeight and not 1000000 * equation3 >= screenHeight: turtle3.pu(); equation3 = screenHeight
+    if math.isnan(float(equation1)): turtle1.pu(); equation1 = 0
+    if math.isnan(float(equation2)): turtle2.pu(); equation2 = 0
+    if math.isnan(float(equation3)): turtle3.pu(); equation3 = 0
 
 import turtle, math
 try: import numpy
