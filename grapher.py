@@ -6,12 +6,12 @@ mode = 1 # Modes: 0 - input/output; 1 - graph only; 2 - both
 # Imagine the equasion# = as a y =
 def equations(x): # Define the equasions here. If you dont want one, just set it to 0 and it will meka a straight line at y = 0 
     global equation1, equation2, equation3
-    equation1 = 0.005 * x ** 3
-    equation2 = math.floor(x / 15) * 10
-    equation3 = 86.6
+    equation1 = 0.001 * (x ** 3) + x
+    equation2 = 0.003 * x ** 2 - (screenHeight / 2)
+    equation3 = math.floor(x / 15) * 15
 
-screenWidth = 1800 # Any Integer
-screenHeight = 1000 # Any Integer
+screenWidth = 600 # Any Integer
+screenHeight = 400 # Any Integer
 
 import turtle, math
 try: import numpy
