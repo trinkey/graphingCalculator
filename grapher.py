@@ -19,7 +19,7 @@ def equations(x): # Define the equasions here. If you dont want one, just set it
 
 import turtle, math
 try: import numpy
-except: pass
+except: print("The numpy library is not installed. Please consider installing it.")
 
 equation1, equation2, equation3 = 0, 0, 0
 
