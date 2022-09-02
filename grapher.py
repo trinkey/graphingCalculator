@@ -1,27 +1,28 @@
 step = 0.1 # How visually accurate the graph is - I suggest keeping it at 0.1 unless you need to chage it othewise
 
-mode = 1 # Modes: 0 - input/output; 1 - graph only; 2 - both
+mode = 2 # Modes: 0 - input/output; 1 - graph only; 2 - both
 
 screenWidth = 600 # Any Integer
 screenHeight = 400 # Any Integer
 
 # Imagine the equasion# = as a y =
 def equations(x): # Define the equasions here. If you dont want one, just set it to 0 and it will meka a straight line at y = 0 
-    global equation1, equation2, equation3
+    global equation1, equation2, equation3, equation1string, equation2string, equation3string
     equation1 = math.floor(x / 15) * 10
     equation2 = 0.003 * x ** 2 - (screenHeight / 2)
     equation3 = 10 * math.sqrt(x)
-    
     # You don't need to do anything below this line
-    
-    if math.isnan(float(equation1)): turtle1.pu(); equation1 = 0
-    if math.isnan(float(equation2)): turtle2.pu(); equation2 = 0
-    if math.isnan(float(equation3)): turtle3.pu(); equation3 = 0
+def equationsstring():
+    global equation1, equation2, equation3, equation1string, equation2string, equation3string
+    if math.isnan(float(equation1)): turtle1.pu(); equation1 = 0; equation1string = "NaN"
+    if math.isnan(float(equation2)): turtle2.pu(); equation2 = 0; equation2string = "NaN"
+    if math.isnan(float(equation3)): turtle3.pu(); equation3 = 0; equation3string = "NaN"
 
 import turtle, math
 try: import numpy
 except: pass
 
+equation1string, equation2string, equation3string = "", "", ""
 equation1, equation2, equation3 = 0, 0, 0
 
 x = 0 - (screenWidth / 2)
@@ -73,6 +74,12 @@ if mode == 0 or mode == 2:
         try:
           x = input("What x coordinate do you wanna find the y values for? (decimals supported)")
           equations(float(x))
-          print("Y values when x = " + x + ":\nEquation 1: " + str(equation1) + "\nEquation 2: " + str(equation2) + "\nEquation 3: " + str(equation3))
+          equationsstring()
+          if equation1string == "": equation1string = str(equation1)
+          if equation2string == "": equation2string = str(equation2)
+          if equation3string == "": equation3string = str(equation3)
+          if mode == 2: print("Y values when x = " + x + ":\nEquation 1 (blue): " + equation1string + "\nEquation 2 (green): " + equation2string + "\nEquation 3 (purple): " + equation3string)
+          else: print("")("Y values when x = " + x + ":\nEquation 1 : " + equation1string + "\nEquation 2 : " + equation2string + "\nEquation 3 : " + equation3string)
         except: print("Bad input")
+        equation1string, equation2string, equation3string = "", "", ""
 screen.mainloop()
