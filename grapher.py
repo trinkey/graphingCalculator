@@ -23,14 +23,10 @@ except: pass
 
 equation1, equation2, equation3 = 0, 0, 0
 
-equation = math.sqrt(-1)
-print equation
-if not equation <= 1000000 * screenHeight and not 1000000 * equation >= screenHeight: equation = screenHeight
-
-
 x = 0 - (screenWidth / 2)
 
 screen = turtle.Screen()
+screen.update()
 screen.setup(screenWidth, screenHeight)
 screen.bgcolor("#333333")
 screen.tracer(0)
