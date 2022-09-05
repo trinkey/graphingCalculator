@@ -2,8 +2,8 @@ step = 0.1 # How visually accurate the graph is - I suggest keeping it at 0.1 un
 
 mode = 2 # Modes: 0 - input/output; 1 - graph only; 2 - both
 
-screenWidth = 1000 # Any Integer
-screenHeight = 750 # Any Integer
+screenWidth = 600 # Any Integer
+screenHeight = 400 # Any Integer
 
 equations = [ # Define equations here. Make sure every one starts with 'lambda x: ' and if theres another equation after it it should have a comma after it - treat that as a 'y = ' when writing equations
     lambda x: math.floor(x / 15) * 10,
