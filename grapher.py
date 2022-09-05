@@ -40,35 +40,35 @@ class Graph: # Define the class
     
     def inout(self, x):  # What to do when input/output
         try:
-            self.vairbale = self.equation(float(x))
-            if math.isnan(float(self.vairbale)): return "NaN"
-            else: return self.vairbale
-        except: return "Bad Input D:"
+            self.vairbale = self.equation(float(x)) # calculate equation
+            if math.isnan(float(self.vairbale)): return "NaN" # if nan return NaN
+            else: return self.vairbale # it not nan return answer
+        except: return "Bad Input D:" # if error return bad input
 
-if mode == 1 or mode == 2:
+if mode == 1 or mode == 2: # if mode 1 or 2 setup turtle window
     screen = turtle.Screen()
     screen.setup(screenWidth, screenHeight)
     screen.bgcolor("#333333")
     screen.tracer(0)
 
-for i in range(len(equations)): graphers.append(Graph(turtleColors[i % 9], equations[i], mode))
+for i in range(len(equations)): graphers.append(Graph(turtleColors[i % 9], equations[i], mode)) # create Graph class object with color and equation
 
 if mode == 1 or mode == 2:
     x = 0 - (screenWidth / 2) # Set minimum x value
 
-    for i in range(round(float(round(screenWidth / step)) + float(step))):
-        for o in graphers: o.graphEquation(x)
-        x += step
-    for o in graphers: o.turtle.hideturtle()
+    for i in range(round(round(screenWidth / step) + step))): # for every step in the screen
+        for o in graphers: o.graphEquation(x) # graph each equation for x value
+        x += step # increase x by step
+    for o in graphers: o.turtle.hideturtle() # hide turtles
 
-    screen.update()
+    screen.update() # update the screen
 
 if mode == 0 or mode == 2:
-    while True:
-        x = input("What do you wanna find the y values for (decimals supported)?\n")
-        print("Outputs when x = " + x)
-        for o in range(len(graphers)): print("Equation " + str(o + 1) + ": " + str(graphers[o].inout(x)))
-        print()
+    while True: # loop forever
+        x = input("What do you wanna find the y values for (decimals supported)?\n") # input x value
+        print("Outputs when x = " + x) # first print statement
+        for o in range(len(graphers)): print("Equation " + str(o + 1) + ": " + str(graphers[o].inout(x))) # print output for each equation
+        print() # newline
 
-if mode == 1:
+if mode == 1: # if mode is 1 make sure graph window doesnâ€™t instantly close
     screen.mainloop()
