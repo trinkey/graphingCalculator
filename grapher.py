@@ -1,28 +1,29 @@
-import turtle, math
-try: import numpy
-except: print("The numpy library is not installed. Please consider installing it.")
-
 step = 0.1 # How visually accurate the graph is - I suggest keeping it at 0.1 unless you need to chage it othewise
 
 screenWidth = 1000 # Any Integer
 screenHeight = 750 # Any Integer
 
-equations = [
+equations = [ # Define equations here. Make sure every one starts with 'lambda x: ' - treat that as a 'y = ' when writing equations
     lambda x: math.floor(x / 15) * 10,
     lambda x: 0.003 * x ** 2 - (screenHeight / 2) + 10,
     lambda x: 100 * math.sin(x / 10),
     lambda x: 10 * math.sqrt(abs(-x)) if x > 0 else float("nan")
 ]
 
+# You do not need to do anything below this line.
+
+import turtle, math
+try: import numpy
+except: print("The numpy library is not installed. Please consider installing it.")
+
 screen = turtle.Screen()
-screen.update()
 screen.setup(screenWidth, screenHeight)
 screen.bgcolor("#333333")
 screen.tracer(0)
 
-
 graphers = []
 turtleColors = ["#FF6347", "#FF8C00", "#FFD700", "#7CFC00", "#00FA9A", "#00CED1", "#6495ED", "#9370DB", "#DA70D6"]
+x = 0 - (screenWidth / 2)
 
 class Graph:
     def __init__(self, color, equation):
@@ -48,17 +49,11 @@ class Graph:
         except: return "Bad Input D:"
 
 for i in range(len(equations)): graphers.append(Graph(turtleColors[i % 9], equations[i]))
-
-x = 0 - (screenWidth / 2)
-
 for i in range(round(float(round(screenWidth / step)) + float(step))):
-    
     for o in graphers: o.graphEquation(x)
-    
     x += step
 
-for o in graphers:
-    o.turtle.hideturtle()
+for o in graphers: o.turtle.hideturtle()
 
 screen.update()
 
