@@ -56,7 +56,7 @@ for i in range(len(equations)): graphers.append(Graph(turtleColors[i % 9], equat
 if mode == 1 or mode == 2:
     x = 0 - (screenWidth / 2) # Set minimum x value
 
-    for i in range(round(round(screenWidth / step) + step))): # for every step in the screen
+    for i in range(round(round(screenWidth / step) + step)): # for every step in the screen
         for o in graphers: o.graphEquation(x) # graph each equation for x value
         x += step # increase x by step
     for o in graphers: o.turtle.hideturtle() # hide turtles
@@ -68,7 +68,7 @@ if mode == 0 or mode == 2:
         x = input("What do you wanna find the y values for (decimals supported)?\n") # input x value
         print("Outputs when x = " + x) # first print statement
         for o in range(len(graphers)): print("Equation " + str(o + 1) + ": " + str(graphers[o].inout(x))) # print output for each equation
-        print() # newline
+        print("") # newline
 
 if mode == 1: # if mode is 1 make sure graph window doesnâ€™t instantly close
     screen.mainloop()
