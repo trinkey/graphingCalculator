@@ -78,5 +78,5 @@ if mode == 0 or mode == 2:
         for o in range(len(graphers)): print("Equation " + str(o + 1) + ": " + str(graphers[o].inout(x))) # Print output for each equation
         print("") # New line
 
-# If mode is 1 make sure graph window doesn't instantly close
+# If mode is 1 (only graph) make sure graph window doesn't instantly close
 if mode == 1: screen.mainloop() # Keep screen open after script stops (only does something on independent python where turtle opens a window)
