@@ -20,13 +20,14 @@ equations = [
 
 # Import libraries
 import turtle, math, random
-try: import numpy
+try: import numpy # Print statement if numpy isn't installed
 except: print("The numpy library is not installed. Please consider installing it.")
 
 graphers = [] # List for the class object
 turtleColors = ["#FF6347", "#FF8C00", "#FFD700", "#7CFC00", "#00FA9A", "#00CED1", "#6495ED", "#9370DB", "#DA70D6"] # Colors for the turtle
 
-class Graph: # Define the class
+# Define the class
+class Graph:
     def __init__(self, color, equation, mode):
         self.equation = equation # Set the equation function
         self.ycor = 0.0 # Define the variable for later
@@ -58,7 +59,8 @@ if mode == 1 or mode == 2: # If mode 1 or 2 setup turtle window
 # Create Graph class object with color and equation
 for i in range(len(equations)): graphers.append(Graph(turtleColors[i % 9], equations[i], mode))
 
-if mode == 1 or mode == 2: # Create the graph if mode is 1 or 2
+# Create the graph if mode is 1 or 2
+if mode == 1 or mode == 2:
     x = 0 - (screenWidth / 2) # Set minimum x value
 
     for i in range(round(round(screenWidth / step) + step)): # For every step in the screen
@@ -68,12 +70,13 @@ if mode == 1 or mode == 2: # Create the graph if mode is 1 or 2
 
     screen.update() # Update the screen
 
-if mode == 0 or mode == 2: # If mode is 0 or 2
+# Do the input/output if mode is 0 or 2
+if mode == 0 or mode == 2:
     while True: # Loop forever
         x = input("What do you wanna find the y values for (decimals supported)?\n") # Input x value
         print("Outputs when x = " + x) # First print statement
         for o in range(len(graphers)): print("Equation " + str(o + 1) + ": " + str(graphers[o].inout(x))) # Print output for each equation
         print("") # New line
 
-if mode == 1: # If mode is 1 make sure graph window doesn't instantly close
-    screen.mainloop() # Keep screen open after script stops 
+# If mode is 1 make sure graph window doesn't instantly close
+if mode == 1: screen.mainloop() # Keep screen open after script stops (only does something on independent python where turtle opens a window)
