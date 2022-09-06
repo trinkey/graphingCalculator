@@ -73,7 +73,7 @@ if mode == 1 or mode == 2:
 # Do the input/output if mode is 0 or 2
 if mode == 0 or mode == 2:
     while True: # Loop forever
-        x = input("What do you wanna find the y values for (decimals supported)?\n") # Input x value
+        x = input("What x value do you want to find the y values for (decimals supported)?\n") # Input x value
         print("Outputs when x = " + x) # First print statement
         for o in range(len(graphers)): print("Equation " + str(o + 1) + ": " + str(graphers[o].inout(x))) # Print output for each equation
         print("") # New line
