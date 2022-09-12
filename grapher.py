@@ -8,7 +8,7 @@ screenHeight = 400 # Any Integer
 # Define equations here.
 # Make sure every one starts with 'lambda x: ' (That allows it to call it as a funtion which allows a variable to change after its defined)
 # If theres another equation after it it should have a comma after it
-# treat that as a 'y = ' when writing equations
+# Treat 'lambda x:' as a 'y = ' when writing equations
 equations = [
     lambda x: math.floor(x / 15) * 10,
     lambda x: 0.003 * x ** 2 - (screenHeight / 2) + 10,
