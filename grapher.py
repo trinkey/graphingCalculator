@@ -6,14 +6,14 @@ screenWidth = 600 # Any Integer
 screenHeight = 400 # Any Integer
 
 # Define equations here.
-# Make sure every one starts with 'lambda x: '
+# Make sure every one starts with 'lambda x: ' (That allows it to call it as a funtion which allows a variable to change after its defined)
 # If theres another equation after it it should have a comma after it
 # treat that as a 'y = ' when writing equations
-equations = [ 
+equations = [
     lambda x: math.floor(x / 15) * 10,
     lambda x: 0.003 * x ** 2 - (screenHeight / 2) + 10,
     lambda x: 100 * math.sin(x / 10),
-    lambda x: 10 * math.sqrt(abs(-x)) if x > 0 else float("nan")
+    lambda x: 10 * math.sqrt(abs(-x)) if x >= 0 else float("nan")
 ]
 
 # You do not need to do anything below this line.
@@ -63,7 +63,7 @@ for i in range(len(equations)): graphers.append(Graph(turtleColors[i % 9], equat
 if mode == 1 or mode == 2:
     x = 0 - (screenWidth / 2) # Set minimum x value
 
-    for i in range(round(round(screenWidth / step) + step)): # For every step in the screen
+    for i in range(round(screenWidth / step + step)): # For every step in the screen
         for o in graphers: o.graphEquation(x) # Graph each equation for x value
         x += step # Increase x by step
     for o in graphers: o.turtle.hideturtle() # Hide turtles
@@ -78,5 +78,5 @@ if mode == 0 or mode == 2:
         for o in range(len(graphers)): print("Equation " + str(o + 1) + ": " + str(graphers[o].inout(x))) # Print output for each equation
         print("") # New line
 
-# If mode is 1 (only graph) make sure graph window doesn't instantly close
+# If mode is 1 make sure graph window doesn't instantly close
 if mode == 1: screen.mainloop() # Keep screen open after script stops (only does something on independent python where turtle opens a window)
