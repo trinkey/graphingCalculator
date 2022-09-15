@@ -13,7 +13,8 @@ equations = [
     lambda x: math.floor(x / 15) * 10,
     lambda x: 0.003 * x ** 2 - (screenHeight / 2) + 10,
     lambda x: 100 * math.sin(x / 10),
-    lambda x: 10 * math.sqrt(abs(-x)) if x >= 0 else float("nan")
+    lambda x: 10 * math.sqrt(abs(-x)) if x >= 0 else float("nan"),
+    lambda x: 100 * (100 / x)
 ]
 
 # You do not need to do anything below this line.
