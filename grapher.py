@@ -1,4 +1,4 @@
-step = 1 # How visually accurate the graph is - I suggest keeping it at 0.1 unless you need to chage it othewise
+step = 0.1 # How visually accurate the graph is - I suggest keeping it at 0.1 unless you need to chage it othewise
 
 mode = 2 # Modes: 0 - input/output; 1 - graph only; 2 - both; 3 - constantly remake the graph (ONLY DO IF USING RANDOM OR ELSE IT DOESNT CHANGE)
 mode3DelayBetweenRegraphs = 0 # Delay between times graphed when mode = 3 (seconds) - Does not take time to graph into account
@@ -6,7 +6,7 @@ mode3DelayBetweenRegraphs = 0 # Delay between times graphed when mode = 3 (secon
 screenWidth = 600 # Any Integer
 screenHeight = 400 # Any Integer
 
-lineSize = 3 # Size of the line (I recommend keeping it below or at 15)
+lineSize = 2 # Size of the line (I recommend keeping it below or at 15 and never below 2)
 clearTurtlesBeforeGraph = False # Clear the turtle before it graphs the equation - Useful when mode = 3
 
 overrideSetupForScreensaver = False # Overrides all setup except screensize for a screensaver preset
