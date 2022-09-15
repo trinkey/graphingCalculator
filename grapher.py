@@ -14,7 +14,7 @@ equations = [
     lambda x: 0.003 * x ** 2 - (screenHeight / 2) + 10,
     lambda x: 100 * math.sin(x / 10),
     lambda x: 10 * math.sqrt(abs(-x)) if x >= 0 else float("nan"),
-    lambda x: 100 * (100 / x)
+    lambda x: 100 * (100 / x) if x != 0 else float("nan")
 ]
 
 # You do not need to do anything below this line.
@@ -44,10 +44,8 @@ class Graph:
         if math.isnan(float(self.ycor)): self.nan = True # If output is nan then self.nan = True
         else: self.turtle.goto(x, self.ycor); self.nan = False # If it isnt nan then goto correct coords
         if self.nan == False: # If it isn't nan
-            self.turtle.pd() # Pen down
-            self.turtle.fd(0) # Make it draw a dot
-            self.turtle.pu() # Pen up
-    
+            self.turtle.dot(1) # Make it draw a dot
+
     def inout(self, x):  # What to do when input/output mode
         try:
             self.vairbale = self.equation(float(x)) # Calculate equation
@@ -68,7 +66,7 @@ for i in range(len(equations)): graphers.append(Graph(turtleColors[i % 9], equat
 if mode == 1 or mode == 2:
     x = 0 - (screenWidth / 2) # Set minimum x value
 
-    for i in range(round(screenWidth / step + step)): # For every step in the screen
+    for i in range(round((screenWidth / step) + step)): # For every step in the screen
         for o in graphers: o.graphEquation(x) # Graph each equation for x value
         x += step # Increase x by step
     for o in graphers: o.turtle.hideturtle() # Hide turtles
