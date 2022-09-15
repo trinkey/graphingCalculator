@@ -8,7 +8,7 @@ screenHeight = 400 # Any Integer
 # Define equations here.
 # Make sure every one starts with 'lambda x: ' (That allows it to call it as a funtion which allows a variable to change after its defined)
 # If theres another equation after it it should have a comma after it
-# Treat 'lambda x:' as a 'y = ' when writing equations
+# treat that as a 'y = ' when writing equations
 equations = [
     lambda x: math.floor(x / 15) * 10,
     lambda x: 0.003 * x ** 2 - (screenHeight / 2) + 10,
@@ -31,6 +31,7 @@ class Graph:
     def __init__(self, color, equation, mode):
         self.equation = equation # Set the equation function
         self.ycor = 0.0 # Define the variable for later
+        self.nan = False # Define the variable for later
         if mode == 1 or mode == 2: # Define turtle if mode is 1 or 2
             self.turtle = turtle.Turtle() # Turtle object
             self.turtle.color(color) # Set turtle color
@@ -39,9 +40,12 @@ class Graph:
     
     def graphEquation(self, x): # What to do when graphing mode
         self.ycor = self.equation(x) # Calculate y value
-        if math.isnan(float(self.ycor)): self.turtle.pu() # If output is nan then penup
-        else: self.turtle.goto(x, self.ycor) # If it isnt nan then goto correct coords
-        self.turtle.pd() # Pen down
+        if math.isnan(float(self.ycor)): self.nan = True # If output is nan then self.nan = True
+        else: self.turtle.goto(x, self.ycor); self.nan = False # If it isnt nan then goto correct coords
+        if self.nan == False: # If it isn't nan
+            self.turtle.pd() # Pen down
+            self.turtle.fd(0) # Make it draw a dot
+            self.turtle.pu() # Pen up
     
     def inout(self, x):  # What to do when input/output mode
         try:
