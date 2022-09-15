@@ -1,9 +1,11 @@
 step = 0.1 # How visually accurate the graph is - I suggest keeping it at 0.1 unless you need to chage it othewise
 
-mode = 2 # Modes: 0 - input/output; 1 - graph only; 2 - both
+mode = 1 # Modes: 0 - input/output; 1 - graph only; 2 - both
 
 screenWidth = 600 # Any Integer
 screenHeight = 400 # Any Integer
+
+lineSize = 1 # Size of the line (I recommend keeping it below or at 15)
 
 # Define equations here.
 # Make sure every one starts with 'lambda x: ' (That allows it to call it as a funtion which allows a variable to change after its defined)
@@ -14,7 +16,9 @@ equations = [
     lambda x: 0.003 * x ** 2 - (screenHeight / 2) + 10,
     lambda x: 100 * math.sin(x / 10),
     lambda x: 10 * math.sqrt(abs(-x)) if x >= 0 else float("nan"),
-    lambda x: 100 * (100 / x) if x != 0 else float("nan")
+    lambda x: 100 * (100 / x) if x != 0 else float("nan"),
+    lambda x: 0.01 * x ** 2 - x if x >= 50 else (4 if x < 50 and x >= 0 else (49 if x < 0 and x >= -50 else x + 200)),
+    lambda x: random.randint(round(x - 10), round(x + 10))
 ]
 
 # You do not need to do anything below this line.
@@ -29,10 +33,11 @@ turtleColors = ["#FF6347", "#FF8C00", "#FFD700", "#7CFC00", "#00FA9A", "#00CED1"
 
 # Define the class
 class Graph:
-    def __init__(self, color, equation, mode):
+    def __init__(self, color, equation, mode, dotsize):
         self.equation = equation # Set the equation function
         self.ycor = 0.0 # Define the variable for later
         self.nan = False # Define the variable for later
+        self.lineSize = dotsize # Define the variable for later
         if mode == 1 or mode == 2: # Define turtle if mode is 1 or 2
             self.turtle = turtle.Turtle() # Turtle object
             self.turtle.color(color) # Set turtle color
@@ -44,7 +49,7 @@ class Graph:
         if math.isnan(float(self.ycor)): self.nan = True # If output is nan then self.nan = True
         else: self.turtle.goto(x, self.ycor); self.nan = False # If it isnt nan then goto correct coords
         if self.nan == False: # If it isn't nan
-            self.turtle.dot(1) # Make it draw a dot
+            self.turtle.dot(self.lineSize) # Make it draw a dot
 
     def inout(self, x):  # What to do when input/output mode
         try:
@@ -60,7 +65,7 @@ if mode == 1 or mode == 2: # If mode 1 or 2 setup turtle window
     screen.tracer(0) # All actions happen as fast as possible
 
 # Create Graph class object with color and equation
-for i in range(len(equations)): graphers.append(Graph(turtleColors[i % 9], equations[i], mode))
+for i in range(len(equations)): graphers.append(Graph(turtleColors[i % 9], equations[i], mode, lineSize))
 
 # Create the graph if mode is 1 or 2
 if mode == 1 or mode == 2:
