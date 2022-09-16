@@ -6,7 +6,9 @@ mode3DelayBetweenRegraphs = 0 # Delay between times graphed when mode = 3 (secon
 screenWidth = 600 # Any Integer
 screenHeight = 400 # Any Integer
 
-lineSize = 2 # Size of the line (I recommend keeping it below or at 15 and never below 2)
+graphAxes = True
+
+lineSize = 2 # Size of the line (I recommend keeping it below or at 15)
 clearTurtlesBeforeGraph = False # Clear the turtle before it graphs the equation - Useful when mode = 3
 
 overrideSetupForScreensaver = False # Overrides all setup except screensize for a screensaver preset
@@ -14,21 +16,21 @@ overrideSetupForScreensaver = False # Overrides all setup except screensize for 
 # Define equations here.
 # Make sure every one starts with 'lambda x: ' (That allows it to call it as a funtion which allows a variable to change after its defined)
 # If theres another equation after it it should have a comma after it
-# treat that as a 'y = ' when writing equations
+# Treat 'lambda x: ' as a 'y = ' when writing equations
 equations = [
     lambda x: math.floor(x / 15) * 10,
     lambda x: 0.003 * x ** 2 - (screenHeight / 2) + 10,
     lambda x: 100 * math.sin(x / 10),
     lambda x: 10 * math.sqrt(abs(-x)) if x >= 0 else float("nan"),
     lambda x: 100 * (100 / x) if x != 0 else float("nan"),
-    lambda x: 0.01 * x ** 2 - x if x >= 50 else (4 if x < 50 and x >= 0 else (49 if x < 0 and x >= -50 else x + 200)),
-    lambda x: random.randint(round(x - 10), round(x + 10)),
+    lambda x: 0.01 * x * 4 ** 2 - x if x >= 50 else (4 if x < 50 and x >= 0 else (49 if x < 0 and x >= -50 else x + 200)),
 ]
 
 # You do not need to modify anything below this line.
 
+# Override the setup for screensavers
 if overrideSetupForScreensaver:
-    equations = [
+    equations = [ # Set equations
         lambda x: random.randint(0 - screenHeight / 2, screenHeight / 2),
         lambda x: random.randint(0 - screenHeight / 2, screenHeight / 2),
         lambda x: random.randint(0 - screenHeight / 2, screenHeight / 2),
@@ -39,11 +41,11 @@ if overrideSetupForScreensaver:
         lambda x: random.randint(0 - screenHeight / 2, screenHeight / 2),
         lambda x: random.randint(0 - screenHeight / 2, screenHeight / 2)
     ]
-    mode = 3
-    clearTurtlesBeforeGraph = True
-    step = 10
-    lineSize = 10
-    mode3DelayBetweenRegraphs = 0.5
+    mode = 3 # Set mode
+    clearTurtlesBeforeGraph = True # Clear graph before regraph
+    step = 10 # Set step
+    lineSize = 10 # Set line size
+    mode3DelayBetweenRegraphs = 0.5 # Set delay between regraphs
 
 # Import libraries
 import turtle, math, random, time
@@ -55,19 +57,28 @@ turtleColors = ["#FF6347", "#FF8C00", "#FFD700", "#7CFC00", "#00FA9A", "#00CED1"
 
 # Define the class
 class Graph:
-    def __init__(self, color, equation, mode, dotsize):
+    def __init__(self, color, equation, mode, dotsize, graphLine, width, height):
         self.equation = equation # Set the equation function
         self.ycor = 0.0 # Define the variable for later
         self.nan = False # Define the variable for later
         self.lineSize = dotsize # Define the variable for later
         if mode == 1 or mode == 2 or mode == 3: # Define turtle if mode is 1 or 2
             self.turtle = turtle.Turtle() # Turtle object
-            self.turtle.color(color) # Set turtle color
             self.turtle.pu() # Pen up
             self.turtle.speed(0) # Maximum speed infinity
-    
-    def clearTurtle(self): self.turtle.clear()
-    
+            if graphLine == 0: # Graph the x andy axis lines
+                self.turtle.color((255, 255, 255)) # Color white
+                self.turtle.pensize(self.lineSize) # Pen size
+                self.turtle.goto(0 - width / 2, 0) # Goto one side
+                self.turtle.pd() # Pendown
+                self.turtle.goto(width / 2, 0) # Goto other side
+                self.turtle.pu() # Penup
+                self.turtle.goto(0, 0 - height / 2) # Goto the bottom
+                self.turtle.pd() # Pendown
+                self.turtle.goto(0, height / 2) # Goto the top
+                self.turtle.pu() # Penup
+            self.turtle.color(color) # Set color
+
     def graphEquation(self, x): # What to do when graphing mode
         self.ycor = self.equation(x) # Calculate y value
         if math.isnan(float(self.ycor)): self.nan = True # If output is nan then self.nan = True
@@ -89,13 +100,13 @@ if mode == 1 or mode == 2 or mode == 3: # If mode 1, 2, or 3 then setup turtle w
     screen.tracer(0) # All actions happen as fast as possible
 
 # Create Graph class object with color and equation
-for i in range(len(equations)): graphers.append(Graph(turtleColors[i % 9], equations[i], mode, lineSize))
+for i in range(len(equations)): graphers.append(Graph(turtleColors[i % 9], equations[i], mode, lineSize, graphAxes, screenWidth, screenHeight)); graphAxes = False
 
 # Create the graph if mode is 1, 2, or 3
 while mode == 1 or mode == 2 or mode == 3:
     for o in graphers: # For every equation:
         x = 0 - (screenWidth / 2) # Set minimum x value
-        if clearTurtlesBeforeGraph: o.clearTurtle() # Clear the turtle
+        if clearTurtlesBeforeGraph: o.turtle.clear() # Clear the turtle
         for i in range(round((screenWidth / step) + step)):
             o.graphEquation(x) # Graph an equation (one at a time)
             x += step # Increase x by step
