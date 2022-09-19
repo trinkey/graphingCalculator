@@ -6,27 +6,28 @@ mode3DelayBetweenRegraphs = 0 # Delay between times graphed when mode = 3 (secon
 screenWidth = 600 # Any Integer
 screenHeight = 400 # Any Integer
 
-graphAxes = True
+graphAxes = False
 
-lineSize = 2 # Size of the line (I recommend keeping it below or at 15)
+lineSize = 2 # Size of the line (ONLY AFFECTS DOT MODE) (I recommend keeping it below or at 15)
 clearTurtlesBeforeGraph = False # Clear the turtle before it graphs the equation - Useful when mode = 3
 
 overrideSetupForScreensaver = False # Overrides all setup except screensize for a screensaver preset
+
+dotOrLine = "LINe" # Use turtle.pendown() or turtle.dot() (Set it to "line" or "dot" - anything else won't work)
 
 # Define equations here.
 # Make sure every one starts with 'lambda x: ' (That allows it to call it as a funtion which allows a variable to change after its defined)
 # If theres another equation after it it should have a comma after it
 # Treat 'lambda x: ' as a 'y = ' when writing equations
 equations = [
-    lambda x: math.floor(x / 15) * 10,
-    lambda x: 0.003 * x ** 2 - (screenHeight / 2) + 10,
-    lambda x: 100 * math.sin(x / 10),
-    lambda x: 10 * math.sqrt(abs(-x)) if x >= 0 else float("nan"),
-    lambda x: 100 * (100 / x) if x != 0 else float("nan"),
-    lambda x: 0.01 * x * 4 ** 2 - x if x >= 50 else (4 if x < 50 and x >= 0 else (49 if x < 0 and x >= -50 else x + 200)),
+    lambda x: x,
+    lambda x: (0 - (2 / 3)) * x + 7,
+    lambda x: 0 - 3 * ((x - 7) / 2)
 ]
 
-# You do not need to modify anything below this line.
+# |-----------------------------------------------------|
+# | You do not need to modify anything below this line. |
+# |-----------------------------------------------------|
 
 # Override the setup for screensavers
 if overrideSetupForScreensaver:
@@ -46,6 +47,10 @@ if overrideSetupForScreensaver:
     step = 10 # Set step
     lineSize = 10 # Set line size
     mode3DelayBetweenRegraphs = 0.5 # Set delay between regraphs
+    graphAxes = False # Don't graph axes
+    dotOrLine = "dot"
+
+dotOrLine = dotOrLine.lower()
 
 # Import libraries
 import turtle, math, random, time
@@ -57,17 +62,18 @@ turtleColors = ["#FF6347", "#FF8C00", "#FFD700", "#7CFC00", "#00FA9A", "#00CED1"
 
 # Define the class
 class Graph:
-    def __init__(self, color, equation, mode, dotsize, graphLine, width, height):
+    def __init__(self, color, equation, mode, dotsize, graphLine, width, height, dot):
         self.equation = equation # Set the equation function
         self.ycor = 0.0 # Define the variable for later
         self.nan = False # Define the variable for later
         self.lineSize = dotsize # Define the variable for later
+        self.lod = dot
         if mode == 1 or mode == 2 or mode == 3: # Define turtle if mode is 1 or 2
             self.turtle = turtle.Turtle() # Turtle object
             self.turtle.pu() # Pen up
             self.turtle.speed(0) # Maximum speed infinity
             if graphLine == 0: # Graph the x andy axis lines
-                self.turtle.color((255, 255, 255)) # Color white
+                self.turtle.color("#FFFFFF") # Color white
                 self.turtle.pensize(self.lineSize) # Pen size
                 self.turtle.goto(0 - width / 2, 0) # Goto one side
                 self.turtle.pd() # Pendown
@@ -81,10 +87,11 @@ class Graph:
 
     def graphEquation(self, x): # What to do when graphing mode
         self.ycor = self.equation(x) # Calculate y value
-        if math.isnan(float(self.ycor)): self.nan = True # If output is nan then self.nan = True
+        if math.isnan(float(self.ycor)): self.nan = True; self.turtle.pu() # If output is nan then self.nan = True
         else: self.turtle.goto(x, self.ycor); self.nan = False # If it isnt nan then goto correct coords
         if self.nan == False: # If it isn't nan
-            self.turtle.dot(self.lineSize) # Make it draw a dot
+            if self.lod == "dot": self.turtle.dot(self.lineSize) # If dot mode make it draw a dot
+            elif self.lod == "line": self.turtle.pd() # If line mode then pendown
 
     def inout(self, x):  # What to do when input/output mode
         try:
@@ -100,7 +107,7 @@ if mode == 1 or mode == 2 or mode == 3: # If mode 1, 2, or 3 then setup turtle w
     screen.tracer(0) # All actions happen as fast as possible
 
 # Create Graph class object with color and equation
-for i in range(len(equations)): graphers.append(Graph(turtleColors[i % 9], equations[i], mode, lineSize, graphAxes, screenWidth, screenHeight)); graphAxes = False
+for i in range(len(equations)): graphers.append(Graph(turtleColors[i % 9], equations[i], mode, lineSize, graphAxes, screenWidth, screenHeight, dotOrLine)); graphAxes = False
 
 # Create the graph if mode is 1, 2, or 3
 while mode == 1 or mode == 2 or mode == 3:
