@@ -6,23 +6,26 @@ mode3DelayBetweenRegraphs = 0 # Delay between times graphed when mode = 3 (secon
 screenWidth = 600 # Any Integer
 screenHeight = 400 # Any Integer
 
-graphAxes = False
+graphAxes = True
 
-lineSize = 2 # Size of the line (ONLY AFFECTS DOT MODE) (I recommend keeping it below or at 15)
+lineSize = 2 # Size of the line (I recommend keeping it below or at 15)
 clearTurtlesBeforeGraph = False # Clear the turtle before it graphs the equation - Useful when mode = 3
 
 overrideSetupForScreensaver = False # Overrides all setup except screensize for a screensaver preset
 
-dotOrLine = "LINe" # Use turtle.pendown() or turtle.dot() (Set it to "line" or "dot" - anything else won't work)
+dotOrLine = "Dot" # Use turtle.pendown() or turtle.dot() (Set it to "line" or "dot" - anything else won't work)
 
 # Define equations here.
 # Make sure every one starts with 'lambda x: ' (That allows it to call it as a funtion which allows a variable to change after its defined)
 # If theres another equation after it it should have a comma after it
 # Treat 'lambda x: ' as a 'y = ' when writing equations
 equations = [
-    lambda x: x,
-    lambda x: (0 - (2 / 3)) * x + 7,
-    lambda x: 0 - 3 * ((x - 7) / 2)
+    lambda x: math.floor(x / 15) * 10,
+    lambda x: 0.003 * x ** 2 - (screenHeight / 2) + 10,
+    lambda x: 100 * math.sin(x / 10),
+    lambda x: 10 * math.sqrt(abs(-x)) if x >= 0 else float("nan"),
+    lambda x: 100 * (100 / x) if x != 0 else float("nan"),
+    lambda x: 0.01 * x ** 2 - x if x >= 50 else (4 if x < 50 and x >= 0 else (49 if x < 0 and x >= -50 else x + 200))
 ]
 
 # |-----------------------------------------------------|
@@ -71,10 +74,10 @@ class Graph:
         if mode == 1 or mode == 2 or mode == 3: # Define turtle if mode is 1 or 2
             self.turtle = turtle.Turtle() # Turtle object
             self.turtle.pu() # Pen up
+            self.turtle.pensize(self.lineSize) # Pen size
             self.turtle.speed(0) # Maximum speed infinity
-            if graphLine == 0: # Graph the x andy axis lines
+            if graphLine == True: # Graph the x andy axis lines
                 self.turtle.color("#FFFFFF") # Color white
-                self.turtle.pensize(self.lineSize) # Pen size
                 self.turtle.goto(0 - width / 2, 0) # Goto one side
                 self.turtle.pd() # Pendown
                 self.turtle.goto(width / 2, 0) # Goto other side
