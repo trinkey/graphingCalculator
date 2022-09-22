@@ -1,19 +1,13 @@
+'''Basic settings'''
+
 step = 0.1 # How visually accurate the graph is - I suggest keeping it at 0.1 unless you need to chage it othewise
 
 mode = 2 # Modes: 0 - input/output; 1 - graph only; 2 - both; 3 - constantly remake the graph (ONLY DO IF USING RANDOM OR ELSE IT DOESNT CHANGE)
-mode3DelayBetweenRegraphs = 0 # Delay between times graphed when mode = 3 (seconds) - Does not take time to graph into account
 
 screenWidth = 600 # Any Integer
 screenHeight = 400 # Any Integer
 
 graphAxes = True
-
-lineSize = 2 # Size of the line (I recommend keeping it below or at 15)
-clearTurtlesBeforeGraph = False # Clear the turtle before it graphs the equation - Useful when mode = 3
-
-overrideSetupForScreensaver = False # Overrides all setup except screensize for a screensaver preset
-
-dotOrLine = "Dot" # Use turtle.pendown() or turtle.dot() (Set it to "line" or "dot" - anything else won't work)
 
 # Define equations here.
 # Make sure every one starts with 'lambda x: ' (That allows it to call it as a funtion which allows a variable to change after its defined)
@@ -28,10 +22,20 @@ equations = [
     lambda x: 0.01 * x ** 2 - x if x >= 50 else (4 if x < 50 and x >= 0 else (49 if x < 0 and x >= -50 else x + 200))
 ]
 
-# |-----------------------------------------------------|
-# | You do not need to modify anything below this line. |
-# |-----------------------------------------------------|
+'''Advanced settings:'''
 
+overrideSetupForScreensaver = False # Overrides all setup except screensize for a screensaver preset
+
+mode3DelayBetweenRegraphs = 0 # Delay between times graphed when mode = 3 (seconds) - Does not take time to graph into account
+clearTurtlesBeforeGraph = False # Clear the turtle before it graphs the equation - Useful when mode = 3
+
+lineSize = 2 # Size of the line (I recommend keeping it below or at 15)
+dotOrLine = "Dot" # Use turtle.pendown() or turtle.dot() (Set it to "line" or "dot" - anything else won't work)
+'''
+|-----------------------------------------------------|
+| You do not need to modify anything below this line. |
+|-----------------------------------------------------|
+'''
 # Override the setup for screensavers
 if overrideSetupForScreensaver:
     equations = [ # Set equations
