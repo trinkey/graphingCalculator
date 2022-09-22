@@ -10,7 +10,7 @@ screenHeight = 400 # Any Integer
 graphAxes = True
 
 # Define equations here.
-# Make sure every one starts with 'lambda x: ' (That allows it to call it as a funtion which allows a variable to change after its defined)
+# Make sure every one starts with 'lambda x: ' (That allows it to call it as a function which allows a variable to change after its defined)
 # If theres another equation after it it should have a comma after it
 # Treat 'lambda x: ' as a 'y = ' when writing equations
 equations = [
