@@ -55,9 +55,9 @@ if overrideSetupForScreensaver:
     lineSize = 10 # Set line size
     mode3DelayBetweenRegraphs = 0.5 # Set delay between regraphs
     graphAxes = False # Don't graph axes
-    dotOrLine = "dot"
+    dotOrLine = "dot" # Dot mode
 
-dotOrLine = dotOrLine.lower()
+dotOrLine = dotOrLine.lower() # Lowercase
 
 # Import libraries
 import turtle, math, random, time
