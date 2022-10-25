@@ -1,6 +1,6 @@
 '''Basic settings'''
 
-step = 0.1 # How visually accurate the graph is - I suggest keeping it at 0.1 unless you need to chage it othewise
+step = 1 # How visually accurate the graph is - I suggest keeping it at 0.1 unless you need to chage it othewise
 
 mode = 2 # Modes: 0 - input/output; 1 - graph only; 2 - both; 3 - constantly remake the graph (ONLY DO IF USING RANDOM OR ELSE IT DOESNT CHANGE)
 
@@ -10,7 +10,7 @@ screenHeight = 400 # Any Integer
 graphAxes = True
 
 # Define equations here.
-# Make sure every one starts with 'lambda x: ' (That allows it to call it as a function which allows a variable to change after its defined)
+# Make sure every one starts with 'lambda x: ' (That allows it to call it as a funtion which allows a variable to change after its defined)
 # If theres another equation after it it should have a comma after it
 # Treat 'lambda x: ' as a 'y = ' when writing equations
 equations = [
@@ -30,7 +30,7 @@ mode3DelayBetweenRegraphs = 0 # Delay between times graphed when mode = 3 (secon
 clearTurtlesBeforeGraph = False # Clear the turtle before it graphs the equation - Useful when mode = 3
 
 lineSize = 2 # Size of the line (I recommend keeping it below or at 15)
-dotOrLine = "Dot" # Use turtle.pendown() or turtle.dot() (Set it to "line" or "dot" - anything else won't work)
+dotOrLine = "line" # Use turtle.pendown() or turtle.dot() (Set it to "line" or "dot" - anything else won't work)
 '''
 |-----------------------------------------------------|
 | You do not need to modify anything below this line. |
@@ -55,9 +55,9 @@ if overrideSetupForScreensaver:
     lineSize = 10 # Set line size
     mode3DelayBetweenRegraphs = 0.5 # Set delay between regraphs
     graphAxes = False # Don't graph axes
-    dotOrLine = "dot" # Dot mode
+    dotOrLine = "dot"
 
-dotOrLine = dotOrLine.lower() # Lowercase
+dotOrLine = dotOrLine.lower()
 
 # Import libraries
 import turtle, math, random, time
@@ -94,9 +94,9 @@ class Graph:
 
     def graphEquation(self, x): # What to do when graphing mode
         self.ycor = self.equation(x) # Calculate y value
-        if math.isnan(float(self.ycor)): self.nan = True; self.turtle.pu() # If output is nan then self.nan = True
+        if math.isnan(float(self.ycor)) or math.isinf(float(self.ycor)): self.nan = True; self.turtle.pu() # If output is nan then self.nan = True
         else: self.turtle.goto(x, self.ycor); self.nan = False # If it isnt nan then goto correct coords
-        if self.nan == False: # If it isn't nan
+        if not self.nan: # If it isn't nan
             if self.lod == "dot": self.turtle.dot(self.lineSize) # If dot mode make it draw a dot
             elif self.lod == "line": self.turtle.pd() # If line mode then pendown
 
@@ -104,7 +104,8 @@ class Graph:
         try:
             self.vairbale = self.equation(float(x)) # Calculate equation
             if math.isnan(float(self.vairbale)): return "NaN" # If equation output is nan return NaN
-            else: return self.vairbale # It not nan return answer
+            elif math.isinf(float(self.vairbale)): return str(self.vairbale)
+            else: return self.vairbale # If not nan return answer
         except: return "Bad Input D:" # If error return bad input
 
 if mode == 1 or mode == 2 or mode == 3: # If mode 1, 2, or 3 then setup turtle window
